@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
   int repeatValue = 0; // Holds int for arg2 for repeat factor.
   
   
+  
   // Loop using getopt to parse command line options.
   while ((option = getopt (argc, argv, "n:")) != -1)
   {
@@ -101,7 +102,7 @@ int main(int argc, char *argv[])
     {
       break;
     }
-    
+
     // Check to see if fork failed.
     if(childpid == -1)
     {
@@ -128,8 +129,8 @@ int main(int argc, char *argv[])
   //fprintf(stderr, "i:%d process ID:%ld parent ID:%ld child ID:%ld\n", i, (long)getpid(), (long)getppid(), (long)childpid);
   //fprintf(stderr, "PR_COUNT = %d.\n", pr_count);
   execl(str1, str1, num1, num2, NULL);
-  perror("Error: Execl failed:.");
+  perror("Error: Execl failed: ");
   // Above perror should not print if execl() works correctly.
-
+  
   return 0;
 }
