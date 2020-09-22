@@ -1,6 +1,8 @@
-//Paul Passiglia
-//cs 4760
-//proc_fan.c 
+// Paul Passiglia
+// cs_4760
+// Project 1
+// 9/22/2020
+// The program proc_fan will summon multiple child process through fork(), exec() using testsim program.
 
 
 #include <stdio.h>
@@ -65,12 +67,12 @@ int main(int argc, char *argv[])
        
         return -1;
      default:
-        printf("Default error.");
+        fprintf(stderr, "Default error.");
         return -1;
     }
   }
   
-  printf("Excellent, you chose a max of %d processes to run simultaneously.\n\n", cvalue);
+  printf("\nExcellent, you chose a max of %d processes to run simultaneously.\n\n", cvalue);
 
   pr_limit = cvalue; // Store cvalue into pr_limit because it holds process limit.
   
@@ -78,7 +80,7 @@ int main(int argc, char *argv[])
   FILE *fptr;
   if ((fptr = fopen("testing.txt", "r")) == NULL)
   {
-    printf("Error! Opening file.\n");
+    fprintf(stderr, "Error! Opening file.\n");
     return -1;
   }
   
@@ -99,6 +101,13 @@ int main(int argc, char *argv[])
     {
       break;
     }
+    
+    // Check to see if fork failed.
+    if(childpid == -1)
+    {
+      perror("Error: Fork failed: ");
+      return -1;
+    }
    
     pr_count++; // Keeps track of current number child processes. 
     birthNum++; // Keeps track of total birthed child processes.
@@ -113,13 +122,14 @@ int main(int argc, char *argv[])
       printf("!!!------> A CHILD IS SLAIN: childpid:%ld <------!!! #ACTIVE CHILDREN = %d.\n", (long)childpid, pr_count); 
     }
   }
-
+  
   // Child that broke free has attributes displayed below and then is taken over by the execl().
   fclose(fptr);
   //fprintf(stderr, "i:%d process ID:%ld parent ID:%ld child ID:%ld\n", i, (long)getpid(), (long)getppid(), (long)childpid);
+  //fprintf(stderr, "PR_COUNT = %d.\n", pr_count);
   execl(str1, str1, num1, num2, NULL);
-  fprintf(stderr, "Execl error.");
-  // Above printf should not print if execl() works correctly.
+  perror("Error: Execl failed:.");
+  // Above perror should not print if execl() works correctly.
 
   return 0;
 }
