@@ -1,0 +1,14 @@
+Paul Passiglia
+cs_4760
+9/22/2020
+README:
+
+I believe I completed nearly all the requirements.
+The program can be executed just like you asked:
+./proc_fan -n #
+The number being 1-20. All appropriate messages for errors should be accounted for.
+I think it is cool to do ./proc_fan -n 5 just to see some of the messages I created because it allows more 
+time to see alerts of a child being born/killed.
+One weird thing I noticed is that the last line in texting.txt fires off twice as two child processes.
+This might have to do with my main loop condition.
+Everything else should be fine, thanks.
